@@ -4,6 +4,7 @@ import 'package:nested_route_sample/src/controller/root_controller.dart';
 import 'package:nested_route_sample/src/pages/explore/explore.dart';
 import 'package:nested_route_sample/src/pages/home/home.dart';
 import 'package:nested_route_sample/src/pages/setting/setting.dart';
+import 'package:nested_route_sample/src/pages/setting/setting_detail.dart';
 
 class Root extends GetView<RootController> {
   Root({Key? key}) : super(key: key);
@@ -38,7 +39,7 @@ class Root extends GetView<RootController> {
                   );
                 },
               ),
-              settingNavigator(),
+              settingNavigator1(),
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(
@@ -68,10 +69,13 @@ class Root extends GetView<RootController> {
       ),
     );
   }
-  // TODO // 여기서부터 이 Navigator 를 자유자재로 사용하는 방법을 보자.
-  // 페이지를 따로 만들어주는것.
-  // 그러기 위해서 감싸줄 수 있도록 하는것
-  Widget settingNavigator() {
+  // TODO
+  // Navigator 를 감싸주는 방법, 아이디만 주면 갈 수 있을 것 같은데???
+  // 라우트를 밖에 만드는 방법
+  // 라우트를 리스트로 만드는 방법,
+
+  // 라우트가 안에 있고, 안에서 페이지 생성하는 방법
+  Widget settingNavigator1() {
     return Navigator(
         key: Get.nestedKey(1), // create a key by index
         initialRoute: '/',
@@ -103,6 +107,26 @@ class Root extends GetView<RootController> {
                       child:  Text("second")
                   ),
                 ),
+              ),
+            );
+          }
+        }
+    );
+  }
+  // 라우트가 안에 있고, 밖의 페이지를 생성하는 방법
+  Widget settingNavigator2() {
+    return Navigator(
+        key: Get.nestedKey(1), // create a key by index, 이 자체가 Global Key 이구나.
+        initialRoute: '/',
+        onGenerateRoute: (settings) {
+          if (settings.name == '/') {
+            return GetPageRoute(
+              page: () => Setting(),
+            );
+          } else if (settings.name == '/second') {
+            return GetPageRoute(
+              page: () => Center(
+                child: SettingDetail(),
               ),
             );
           }

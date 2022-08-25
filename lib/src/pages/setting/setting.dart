@@ -8,8 +8,8 @@ class Setting extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          Get.toNamed('/SettingDetail', id: 1);
+          Get.toNamed('/second', id: 1); // 아이디를 주니깐 거기로 가는구나.
         },
-        child: const Center(child: Text('SETTING')));
+        child: const Center(child: Text('SETTING 입니다.')));
   }
 }
