@@ -4,16 +4,16 @@ import 'package:nested_route_sample/src/pages/setting/setting.dart';
 import 'package:nested_route_sample/src/pages/setting/setting_detail.dart';
 
 class SettingNavigatorRoutes {
-  static const String root = '/Setting'; // 이렇게 루트를 static 으로 정하고
-  static const String settingDetail = '/SettingDetail';
+  static const String root = '/'; // 이렇게 루트를 static 으로 정하고
+  static const String settingDetail = '/SettingDetailPage';
 }
 
 class SettingNavigator extends StatelessWidget {
   const SettingNavigator({Key? key}) : super(key: key);
-  Map<String, WidgetBuilder> _routeBuilders(BuildContext context) {
+  Map<String, Widget> _routeBuilders(BuildContext context) {
     return {
-      SettingNavigatorRoutes.root: (context) => const Setting(),
-      SettingNavigatorRoutes.settingDetail: (context) => const SettingDetail(),
+      SettingNavigatorRoutes.root: Setting(),
+      SettingNavigatorRoutes.settingDetail: SettingDetail(),
     };
   }
 
@@ -27,13 +27,13 @@ class SettingNavigator extends StatelessWidget {
         if (routeSettings.name == SettingNavigatorRoutes.root) {
           return GetPageRoute(
             page: () {
-              return routeBuilders[routeSettings.name!]!(context);
+              return routeBuilders[routeSettings.name!]!;
             }
           );
         } else {
           return GetPageRoute(
               page: () {
-                return routeBuilders[routeSettings.name!]!(context);
+                return routeBuilders[routeSettings.name!]!;
               }
           );
         }
