@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nested_route_sample/src/controller/root_controller.dart';
 import 'package:nested_route_sample/src/pages/explore/explore_detail_page.dart';
+import 'package:get/get.dart';
 
 class Explore extends StatelessWidget {
   const Explore({Key? key}) : super(key: key);
@@ -25,14 +26,14 @@ class Explore extends StatelessWidget {
     );
   }
 
-  Widget _categoryMenu(BuildContext context) {
+  Widget _categoryMenu() {
     return Wrap(
       children: [
         GestureDetector(
           onTap: () {
             RootController.to.setCategoryPage(true);
-            Navigator.push( // 봐라.. 이미 nested Navigator 안에 들어와 있다.
-                context,
+            // GetX 를 사용하면 Navigator 도 이렇게 navigator 로 사용하며, context 가 필요없다.
+            navigator?.push( // 봐라.. 이미 nested Navigator 안에 들어와 있다.
                 MaterialPageRoute(
                     builder: (context) => const ExploreDetailPage()));
           },
@@ -99,7 +100,7 @@ class Explore extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _categoryMenu(context),
+        _categoryMenu(),
         Expanded(child: _list()),
       ],
     );
