@@ -31,7 +31,7 @@ class Explore extends StatelessWidget {
         GestureDetector(
           onTap: () {
             RootController.to.setCategoryPage(true);
-            Navigator.push(
+            Navigator.push( // 봐라.. 이미 nested Navigator 안에 들어와 있다.
                 context,
                 MaterialPageRoute(
                     builder: (context) => const ExploreDetailPage()));

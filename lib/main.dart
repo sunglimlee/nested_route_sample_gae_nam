@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nested_route_sample/src/controller/root_controller.dart';
+import 'package:nested_route_sample/src/controller/test_controller.dart';
 import 'package:nested_route_sample/src/pages/home/detail_page.dart';
 import 'package:nested_route_sample/src/root.dart';
 
@@ -16,14 +17,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Flutter Demo',
-      initialBinding: BindingsBuilder(() {
+      initialBinding: BindingsBuilder(() { // 여기처럼 한꺼번에 Get.put 할 때 유용하다.
         Get.put(RootController());
       }),
+      //initialBinding: TestController(),
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      getPages: [
+        GetPage(name: '/detailPage', page: () => const DetailPage())],
       home: Root(),
-      getPages: [GetPage(name: '/detailPage', page: () => const DetailPage())],
     );
   }
 }
