@@ -38,7 +38,7 @@ class Root extends GetView<RootController> {
                   );
                 },
               ),
-              const Setting(),
+              settingNavigator(),
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(
@@ -66,6 +66,47 @@ class Root extends GetView<RootController> {
           ),
         ),
       ),
+    );
+  }
+  // TODO // 여기서부터 이 Navigator 를 자유자재로 사용하는 방법을 보자.
+  // 페이지를 따로 만들어주는것.
+  // 그러기 위해서 감싸줄 수 있도록 하는것
+  Widget settingNavigator() {
+    return Navigator(
+        key: Get.nestedKey(1), // create a key by index
+        initialRoute: '/',
+        onGenerateRoute: (settings) {
+          if (settings.name == '/') {
+            return GetPageRoute(
+              page: () => Scaffold(
+                appBar: AppBar(
+                  title: Text("Main"),
+                ),
+                body: Center(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Get.toNamed('/second', id:1); // navigate by your nested route by index
+                    },
+                    child: Text("Go to second"),
+                  ),
+                ),
+              ),
+            );
+          } else if (settings.name == '/second') {
+            return GetPageRoute(
+              page: () => Center(
+                child: Scaffold(
+                  appBar: AppBar(
+                    title: Text("Main"),
+                  ),
+                  body: Center(
+                      child:  Text("second")
+                  ),
+                ),
+              ),
+            );
+          }
+        }
     );
   }
 }

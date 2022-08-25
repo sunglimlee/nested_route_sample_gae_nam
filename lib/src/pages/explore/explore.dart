@@ -26,14 +26,14 @@ class Explore extends StatelessWidget {
     );
   }
 
-  Widget _categoryMenu() {
+  Widget _categoryMenu(BuildContext context) {
     return Wrap(
       children: [
         GestureDetector(
           onTap: () {
             RootController.to.setCategoryPage(true);
             // GetX 를 사용하면 Navigator 도 이렇게 navigator 로 사용하며, context 가 필요없다.
-            navigator?.push( // 봐라.. 이미 nested Navigator 안에 들어와 있다.
+            Navigator.push(context,  // 봐라.. 이미 nested Navigator 안에 들어와 있다.
                 MaterialPageRoute(
                     builder: (context) => const ExploreDetailPage()));
           },
@@ -100,7 +100,7 @@ class Explore extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _categoryMenu(),
+        _categoryMenu(context),
         Expanded(child: _list()),
       ],
     );
